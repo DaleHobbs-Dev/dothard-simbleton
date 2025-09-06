@@ -1,11 +1,15 @@
 import { getBusinesses } from "./database.js";
 
-const businessList = getBusinesses();
+const businesses = getBusinesses();
 
-export const BusinessList = () => {
-  let businessHTML = ``;
-  businessList.forEach((business) => {
-    businessHTML += `<div class="business">
+export const NewYorkList = () => {
+  let nyBusinessHTML = `<h3>New York Businesses</h3>`;
+  const nyBusinesses = businesses.filter(
+    (business) => business.addressStateCode === "NY"
+  );
+
+  nyBusinesses.forEach((business) => {
+    nyBusinessHTML += `<div class="NY-business">
                         <h3><strong>${business.companyName}</strong></h3>
                         <p>${business.addressFullStreet}<br />
                         ${business.addressCity}, ${business.addressStateCode} ${business.addressZipCode}</p>
@@ -13,5 +17,5 @@ export const BusinessList = () => {
                 <hr/>`;
   });
 
-  return businessHTML;
+  return nyBusinessHTML;
 };
